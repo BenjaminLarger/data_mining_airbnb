@@ -2,10 +2,10 @@
 
 // DOM elements
 const submitButton = document.getElementById('submit-button');
-const travelInput = document.getElementById('travel-input');
+const travelInput = document.getElementById('city-select');
 const mapContainer = document.getElementById('map');
 // Backend API endpoint
-const API_ENDPOINT = ' http://127.0.0.1:8888/api/suggestions'; // Replace with your actual backend endpoint
+const API_ENDPOINT = ' http://127.0.0.1:8888/api/postdata'; // Replace with your actual backend endpoint
 
 // Function to handle form submission
 function handleFormSubmission() {
@@ -27,7 +27,7 @@ function handleFormSubmission() {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query: userInput }),
+    body: JSON.stringify({ city: userInput }),
   })
     .then((response) => {
       if (!response.ok) {

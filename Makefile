@@ -1,10 +1,13 @@
 SHELL	= /bin/sh
 
-NAME	= tripRecommendator
+NAME	= data_mining
 
 all:
 	cd srcs && docker compose up --build
 
+# Remove zone identifier files
+delete_zone_identifier:
+	find . -name "*Zone.Identifier" -type f -delete
 
 down:
 	cd srcs && docker compose down -v

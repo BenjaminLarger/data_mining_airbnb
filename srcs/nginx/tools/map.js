@@ -26,7 +26,7 @@ function updateMap(suggestions) {
       console.log('Invalid city coordinates:', city, coordinates);
     }
     if (!has_markers) {
-      alert('No suggestions found for your query. Please try again!');
+      alert('No suggestions found for your file. Please try again!');
     }
   }
 }

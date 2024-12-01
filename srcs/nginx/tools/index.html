@@ -3,20 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Recommender</title>
+  <title>Airbnb data analysis</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" /> 
 </head>
 <body>
   <header>
-    <h1>Travel Recommender</h1>
+    <h1>Airbnb data analysis</h1>
   </header>
   <main>
     <div class="input-container">
-      <label for="travel-input">What kind of travel would you like?</label>
-      <input type="file" id="travel-input"  placeholder="Provide the .parquet file here" style="width: 80%;" accept=".parquet">
-      <button id="submit-button">Search</button>
+      <label for="city-select">Provide the .parquet file here.</label>
+      <!-- <input type="file" id="city-select"  placeholder="Provide the .parquet file here" style="width: 80%;" accept=".parquet"> -->
+      <select id="city-select">
+				<option value="paris">Paris</option>
+				<option value="london">Londres</option>
+				<option value="roma">Rome</option>
+				<option value="istanbul">Istanbul</option>
+				<option value="rio">Rio</option>
+				<option value="sydney">Sydney</option>
+				<option value="new-york">New York</option>
+				<option value="mexico">Mexique</option>
+			</select>
+			<button id="submit-button">Search</button>
     </div>
+		<div class="dropdown-container">
+			<label for="city-select">Select a city:</label>
+			
+		</div>
     <div id="map" class="map-container">
       <!-- Map will be rendered here -->
       <div id="map" style="height: 400px; width: 100%;"></div>
