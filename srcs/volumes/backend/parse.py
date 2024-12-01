@@ -8,21 +8,6 @@ FILE_DIR = "build/utils/subject/"
 
 def	clean_data(df):
 	# clean_dataset init
-	# Loop through df
-    # if fd['host_is_superhost'] != f or t => continue
-    # if fd['instant_bookable'] != f or t => continue
-    # if fd['latitude'] is not a number => continue
-    # if fd['longitude'] is not a number => continue
-    # if fd['property_type'] is not 'Entire rental unit' or 'Private room in rental unit' or 'Room in hotel' or 'Entire home' or 'Private room in bed and breakfast' or 'Entire condo' => continue
-    # if fd['room_type'] is not 'Private room' or 'Entire home/apt' or 'Hotel room' or 'Shared room' => continue
-    # if fd['accomodates] is not a number greater than 0 and less than 100 => continue
-    # if fd['bathrooms] is not a number greater than 0 and less than 100 => continue
-    # if fd['bedrooms] is not a number greater than 0 and less than 100 => continue
-    # if fd['beds] is not a number greater than 0 and less than 100 => continue
-    # if fd['review_scores_rating] is not a number greater than 0 and less than 5 => continue
-    # if fd['minimum_nights] is not a number greater than 0 and less than 365 => continue
-    # if fd['number_of_reviews] is not a number greater than 0 => continue
-    #return clean_dataset
     """
     Cleans the given DataFrame by filtering rows based on specific criteria.
 
@@ -110,8 +95,9 @@ def open_and_parse_file(file):
         clean_dataset = clean_data(df)
         
         # Write the cleaned dataset to a new csv file
-        #clean_dataset.to_csv('cleaned_dataset.csv', index=False)        
+        # clean_dataset.to_csv('cleaned_dataset.csv', index=False)        
         return clean_dataset
     except Exception as e:
         logging.error(f"Error opening the file: {e}")
         return {"error": str(e)}
+    
