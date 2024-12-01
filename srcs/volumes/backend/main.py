@@ -2,6 +2,7 @@ import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from parse import open_and_parse_file
+from correlation import select_pertinent_data
 
 app = Flask(__name__)
 CORS(app)
@@ -23,7 +24,11 @@ def post_data():
     
     data = open_and_parse_file(city)
     
-    return jsonify({"message": "Data received successfully"}), 200
+    selected_data = select_pertinent_data(data)
+    
+		# Create a json response
+    json_response = data.to_json(orient='records')
+    return json_response
 
     # # Call the Interrogator API
     # cities_json_gemini = get_cities(file)

@@ -40,8 +40,12 @@ function handleFormSubmission() {
     .then((data) => {
       submitButton.disabled = false;
       submitButton.innerHTML = 'Submit';
-      console.log('Received data:', data);
-      updateMap(data);
+      // console.log('Received data:', data);
+      // updateMap(data);
+			// Show data in the html page
+			// document.getElementById('suggestions').innerHTML = data.suggestions;
+
+
     })
     .catch((error) => {
       submitButton.disabled = false;
