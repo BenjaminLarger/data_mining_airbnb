@@ -48,7 +48,7 @@ def	clean_data(df):
 			& (pd.to_numeric(df['beds'], errors='coerce').between(1, 100))
 			& (pd.to_numeric(df['review_scores_rating'], errors='coerce').between(0, 5))
 			& (pd.to_numeric(df['minimum_nights'], errors='coerce').between(1, 365))
-			& (pd.to_numeric(df['number_of_reviews'], errors='coerce') > 0)
+			& (pd.to_numeric(df['number_of_reviews'], errors='coerce') >= 0)
 			& (pd.to_numeric(df['price'], errors='coerce').between(15, 10000))
 			& (pd.to_numeric(df['host_total_listings_count'], errors='coerce').between(0, 10000))
 			# & (df['neighbourhood_cleansed'].isin(valid_neighbourhood_cleansed))
@@ -122,7 +122,13 @@ def open_and_parse_file(file):
 				pf = ParquetFile(file_path)
 				df = pf.to_pandas()
 
-				clean_dataset = clean_data(df)		
+				clean_dataset = clean_data(df)
+
+				# Save the results to a new file as excel
+				#clean_dataset.to_excel("/tmp/clean_dataset.xlsx")
+				# Check if the file has been created
+				
+				# clean_dataset.to_parquet("/tmp/clean_dataset.parquet")
 				
 				return clean_dataset
 		except Exception as e:

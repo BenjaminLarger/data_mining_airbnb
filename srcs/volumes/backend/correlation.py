@@ -14,18 +14,14 @@ def select_features(df):
 	correlation_with_target = correlation_matrix['price'].sort_values(ascending=False)
 	logging.info(f"correlation_with_target: {correlation_with_target}")
 
-	# Visualize correlations (optional)
-	sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm")
-	logging.info("Correlation Matrix Heatmap")
-	plt.show()
-
 	# Select features with high correlation to price
 	selected_features = correlation_with_target[abs(correlation_with_target) > 0.1].index.tolist()
-	print("Selected Features:", selected_features)
+	#logging.info(f"Selected Features:", selected_features)
 	return selected_features
 
 def select_pertinent_data(data):
-
+	logging.info("select_pertinent_data")
+	logging.info(f"Data: {data}")
 	# Delete valid_neighbourhood_cleansed column from the dataset
 	del data['neighbourhood_cleansed']
 	del data['property_type']
@@ -34,5 +30,9 @@ def select_pertinent_data(data):
 	# Select features
 	selected_data = select_features(data)
 
+	# Delete columns with low correlation
+	for column in data.columns:
+		if column not in selected_data:
+			del data[column]
 
 	return selected_data

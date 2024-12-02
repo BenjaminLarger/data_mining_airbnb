@@ -2,7 +2,9 @@ import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from parse import open_and_parse_file
+from random_forest import random_forest_model
 from correlation import select_pertinent_data
+from gradient_boosting import gradient_boosting_model
 
 app = Flask(__name__)
 CORS(app)
@@ -25,6 +27,9 @@ def post_data():
     data = open_and_parse_file(city)
     
     selected_data = select_pertinent_data(data)
+    
+    random_forest_model(selected_data, data)
+    gradient_boosting_model(selected_data, data)
     
 		# Create a json response
     json_response = data.to_json(orient='records')

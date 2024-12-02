@@ -6,3 +6,4 @@ pandas
 fastparquet
 seaborn
 matplotlib
+scikit-learn
