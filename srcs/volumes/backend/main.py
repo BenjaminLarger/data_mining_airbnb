@@ -25,6 +25,9 @@ def post_data():
         return jsonify({"error": "No city provided"}), 400
     
     data = open_and_parse_file(city)
+
+    if data.get('error'):
+        return jsonify(data), 400
     
     selected_data = select_pertinent_data(data)
     

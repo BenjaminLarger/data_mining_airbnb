@@ -23,8 +23,8 @@ def select_pertinent_data(data):
 	logging.info("select_pertinent_data")
 	logging.info(f"Data: {data}")
 	# Delete valid_neighbourhood_cleansed column from the dataset
-	del data['property_type']
-	del data['room_type']
+	#del data['property_type']
+	#del data['room_type']
 
 	# Select features
 	selected_data = select_features(data)
