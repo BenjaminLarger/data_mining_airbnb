@@ -34,7 +34,6 @@ def post_data():
 		# Create a json response
     json_response = data.to_json(orient='records')
     return json_response
-
     # # Call the Interrogator API
     # cities_json_gemini = get_cities(file)
     # if cities_json_gemini.get('error') or cities_json_gemini == {}:

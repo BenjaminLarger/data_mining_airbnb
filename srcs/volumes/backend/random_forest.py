@@ -19,7 +19,7 @@ def random_forest_model(columns, data):
 
 	# Split the data into training and testing sets
 	logging.info(f"X: {X}")
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 	logging.info(f"X_train: {X_train}")
 	logging.info(f"X_test: {X_test}")
 	logging.info(f"y_train: {y_train}")

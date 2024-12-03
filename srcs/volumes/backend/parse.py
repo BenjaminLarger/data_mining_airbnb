@@ -6,6 +6,82 @@ logging.basicConfig(level=logging.INFO)
 
 FILE_DIR = "build/utils/subject/"
 
+import pandas as pd
+
+def extract_neighborhood_data(df):
+    """
+    Extracts neighborhood data as a list of tuples with the neighborhood name
+    and its average price.
+
+    Args:
+        df (pd.DataFrame): The input DataFrame containing 'neighbourhood_cleansed' and 'price' columns.
+
+    Returns:
+        list: A list of tuples where each tuple contains the neighborhood name and its average price.
+    """
+    # Ensure the 'price' column is numeric
+    df['price'] = pd.to_numeric(df['price'], errors='coerce')
+
+    # Group by 'neighbourhood_cleansed' and calculate the mean price
+    grouped_data = df.groupby('neighbourhood_cleansed')['price'].mean().reset_index()
+
+    # Sort by price in descending order
+    grouped_data = grouped_data.sort_values(by='price', ascending=False)
+
+    # Convert the result to a list of tuples
+    neighborhood_data = list(grouped_data.itertuples(index=False, name=None))
+
+    return neighborhood_data
+
+def generate_neighborhood_map(neighborhood_data):
+    """
+    Generate a mapping from neighborhood names to their ranking index.
+
+    Returns:
+        dict: A dictionary where keys are neighborhood names and values are their ranks.
+    """
+
+    # Sort neighborhoods by their values (descending order, assuming it's average price)
+    sorted_neighborhoods = sorted(neighborhood_data, key=lambda x: x[1], reverse=True)
+
+    # Generate the mapping
+    neighborhood_map = {neighborhood: rank for rank, (neighborhood, _) in enumerate(sorted_neighborhoods, start=1)}
+
+    return neighborhood_map
+
+
+def get_average_price_per_neighborhood(df):
+		"""
+		Calculate the average price per neighborhood from a given DataFrame.
+
+		Args:
+		 df (pd.DataFrame): Input DataFrame with 'neighbourhood_cleansed' and 'price' columns.
+
+		Returns:
+		 pd.DataFrame: A DataFrame with neighborhoods and their average prices.
+		"""
+		# Ensure the 'price' column is numeric
+		df['price'] = pd.to_numeric(df['price'], errors='coerce')
+
+		# Group by 'neighbourhood_cleansed' and calculate the average price
+		average_price_per_neighborhood = df.groupby('neighbourhood_cleansed')['price'].mean().reset_index()
+
+		# Rename the columns for better readability
+		average_price_per_neighborhood.columns = ['Neighbourhood', 'Average Price']
+
+		# Rank the neighborhoods by average price
+		average_price_per_neighborhood = average_price_per_neighborhood.sort_values(by='Average Price', ascending=False)
+
+		# Check the DataFrame after sorting
+		logging.info(f"average_price_per_neighborhood after sorting: {average_price_per_neighborhood}")
+
+		return average_price_per_neighborhood
+
+# Example of usage
+# result = get_average_price_per_neighborhood(your_dataframe)
+# print(result)
+
+
 def	clean_data(df):
 	# clean_dataset init
 		"""
@@ -32,8 +108,31 @@ def	clean_data(df):
 		valid_room_types = ['Private room', 'Entire home/apt', 'Hotel room', 'Shared room']
 		# valid_neighbourhood_cleansed = ['Le Marais', 'Popincourt', 'Buttes-Chaumont', 'Vaugirard', 'Opéra', 'Entrepôt', 'Batignolles-Monceau', 'Passy', 'Reuilly', 'Gobelins', 'Luxembourg', 'Palais-Bourbon', 'Ménilmontant', 'Observatoire', 'Panthéon', 'Hôtel-de-Ville', 'Bourse', 'Louvre']
 		# Filter rows based on conditions
+		logging.info(f"df: {df}")
+		neighborhood_data = extract_neighborhood_data(df)
+		logging.info(f"df: {df}")
+		logging.info(f"neighborhood_data: {neighborhood_data}")
+		neighborhood_map = generate_neighborhood_map(neighborhood_data)
+		logging.info(f"neighborhood_map: {neighborhood_map}")
+		df['neighbourhood_cleansed'] = df['neighbourhood_cleansed'].map(neighborhood_map)
 		df['host_is_superhost'] = df['host_is_superhost'].map({'f': 0, 't': 1})
 		df['instant_bookable'] = df['instant_bookable'].map({'f': 0, 't': 1})
+		average_price_per_neighborhood = get_average_price_per_neighborhood(df)
+		# Create a map of neighborhoods with host_is_superhost and instant_bookable
+		neighborhood_map = df.groupby('neighbourhood_cleansed').agg({
+			'host_is_superhost': 'mean',
+			'instant_bookable': 'mean'
+		}).reset_index()
+
+		# Merge the average price per neighborhood with the neighborhood map
+		average_price_per_neighborhood = average_price_per_neighborhood.merge(
+			neighborhood_map, left_on='Neighbourhood', right_on='neighbourhood_cleansed', how='left'
+		).drop(columns=['neighbourhood_cleansed'])
+
+		# Rename the columns for better readability
+		average_price_per_neighborhood.columns = [
+			'Neighbourhood', 'Average Price', 'Superhost Ratio', 'Instant Bookable Ratio'
+		]
 		
 		clean_dataset = df[
 			(df['host_is_superhost'].isin([0, 1]))
@@ -100,10 +199,12 @@ def	clean_data(df):
 		# logging.info(f"clean_dataset property_type = {clean_dataset['property_type']}")
 		logging.info(f"clean_dataset host_is_superhost = {clean_dataset['host_is_superhost']}")
 		logging.info(f"clean_dataset instant_bookable = {clean_dataset['instant_bookable']}")
+		logging.info(f"clean_dataset 		neighbourhood_cleansed = {clean_dataset['neighbourhood_cleansed']}")
 		logging.info('===============================')
 		logging.info('---------------------------------------------------------------')
 
 		# Return the cleaned dataset
+		clean_dataset = clean_dataset[[col for col in clean_dataset.columns if not col.endswith('_na')]]
 		return clean_dataset
 
 
