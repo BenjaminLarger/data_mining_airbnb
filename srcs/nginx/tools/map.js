@@ -24,6 +24,8 @@ function updateMap(suggestions) {
 		has_markers = true;
 		var marker = L.marker([latitude, longitude]).addTo(map);
 		markers.push(marker);
+		// update map view
+		map.setView([latitude, longitude], 8);
 	} else {
 		console.log('Invalid city coordinates:', city, coordinates);
 	}
