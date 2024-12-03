@@ -41,8 +41,13 @@ def random_forest_model(columns, data):
 	# Feature importance
 	feature_importance_plot(regressor, X)
 
+	results = {
+		'Root Mean Squared Error': rmse,
+		'R^2 Score': r2_score
+	}
+
 	logging.info("-----------------")
-	return regressor
+	return results
 
 # from sklearn.model_selection import GridSearchCV
 

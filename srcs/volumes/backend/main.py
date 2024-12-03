@@ -5,6 +5,7 @@ from parse import open_and_parse_file
 from random_forest import random_forest_model
 from correlation import select_pertinent_data
 from gradient_boosting import gradient_boosting_model
+from regression import linear_regression_model
 
 app = Flask(__name__)
 CORS(app)
@@ -31,8 +32,9 @@ def post_data():
     
     selected_data = select_pertinent_data(data)
     
-    random_forest_model(selected_data, data)
-    gradient_boosting_model(selected_data, data)
+    #random_forest_model(selected_data, data)
+    #gradient_boosting_model(selected_data, data)
+    linear_regression_model(selected_data, data)
     
 		# Create a json response
     json_response = data.to_json(orient='records')

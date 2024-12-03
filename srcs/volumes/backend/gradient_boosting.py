@@ -49,6 +49,10 @@ def gradient_boosting_model(columns, data):
 	# Fit the model
 	gbr2.fit(X_train, y_train)
 
+	# results = {
+	# 		'Best Parameters': gbr2.best_params_,
+	# 		'Best Score': gbr2.best_score_
+	# }
 	#logging.info("Best Parameters:", gbr2.best_params_)
 	#logging.info("Best Score:", gbr2.best_score_)
 
