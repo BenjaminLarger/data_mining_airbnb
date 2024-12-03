@@ -41,3 +41,37 @@ def get_cities_from_dictionary(city, country):
           'latitude': float(row['lat']),
           'longitude': float(row['lng'])
         }
+
+def get_and_parse_city(city):
+	"""
+	Returns city information (name, latitude, longitude) for a given city name.
+
+	Args:
+		city (str): Name of the city
+	"""
+	logging.info(f"Searching for city: {city}")
+	if city == 'rio':
+		city_dic = 'Rio de Janeiro'
+		country = 'Brazil'
+	elif city == 'paris':
+		city_dic = city
+		country = 'france'
+	elif city == 'rome':
+		city_dic = city
+		country = 'italy'
+	elif city == 'istanbul':
+		city_dic = city
+		country = 'turkey'
+	elif city == 'sydney':
+		city_dic = 'Sydney'
+		country = 'Australia'
+	elif city == 'new-york':
+		city_dic = 'New York'
+		country = 'United States'
+	elif city == 'mexico':
+		city_dic = 'mexico city'
+		country = 'mexico'
+	elif city == 'london':
+		city_dic = city
+		country = 'United Kingdom'
+	return get_cities_from_dictionary(city_dic, country)

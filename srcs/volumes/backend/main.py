@@ -6,6 +6,7 @@ from random_forest import random_forest_model
 from correlation import select_pertinent_data
 from gradient_boosting import gradient_boosting_model
 from regression import linear_regression_model
+from dictionary import get_and_parse_city
 
 app = Flask(__name__)
 CORS(app)
@@ -20,6 +21,9 @@ def post_data():
     # Get user input from the request
     data = request.get_json()
     city = data.get('city', '')
+    dictionary_response = get_and_parse_city(city)
+    latitude = dictionary_response.get('latitude')
+    longitude = dictionary_response.get('longitude')
     logging.info(f"city: {city}")
 
     if not city:
@@ -34,10 +38,15 @@ def post_data():
     
     #random_forest_model(selected_data, data)
     #gradient_boosting_model(selected_data, data)
-    linear_regression_model(selected_data, data)
+    #linear_regression_model(selected_data, data)
     
-		# Create a json response
-    json_response = data.to_json(orient='records')
+    # Create a json response
+    json_response = {
+        'city': city,
+        'latitude': latitude,
+        'longitude': longitude,
+        'data': selected_data
+    }
     return json_response
     # # Call the Interrogator API
     # cities_json_gemini = get_cities(file)

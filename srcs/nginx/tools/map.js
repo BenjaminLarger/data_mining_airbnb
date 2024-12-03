@@ -9,24 +9,25 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Function to update the map with new suggestions
 function updateMap(suggestions) {
+	latitude = suggestions.latitude;
+	longitude = suggestions.longitude;
+	city = suggestions.city;
+	console.log('City:', city);
+	console.log('Latitude:', latitude);
+	console.log('Longitude:', longitude);
   let has_markers = false;
   for (const marker of markers) {
     map.removeLayer(marker);
   }
   console.log('Updating map with new suggestions:', suggestions);
-  for (const [city, coordinates] of Object.entries(suggestions)) {
-    if (coordinates && coordinates.latitude && coordinates.longitude) {
-      has_markers = true;
-      console.log(`City: ${city}`);
-      console.log(`Latitude: ${coordinates.latitude}`);
-      console.log(`Longitude: ${coordinates.longitude}`);
-      var marker = L.marker([coordinates.latitude, coordinates.longitude]).addTo(map);
-      markers.push(marker);
-    } else {
-      console.log('Invalid city coordinates:', city, coordinates);
-    }
-    if (!has_markers) {
-      alert('No suggestions found for your file. Please try again!');
-    }
-  }
+  if (latitude && longitude) {
+		has_markers = true;
+		var marker = L.marker([latitude, longitude]).addTo(map);
+		markers.push(marker);
+	} else {
+		console.log('Invalid city coordinates:', city, coordinates);
+	}
+	if (!has_markers) {
+		alert('No suggestions found for your file. Please try again!');
+	}
 }
