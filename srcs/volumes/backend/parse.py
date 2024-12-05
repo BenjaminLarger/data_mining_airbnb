@@ -92,7 +92,7 @@ def generate_neighborhood_map(neighborhood_data):
     """
 
     # Sort neighborhoods by their values (descending order, assuming it's average price)
-    sorted_neighborhoods = sorted(neighborhood_data, key=lambda x: x[1], reverse=True)
+    sorted_neighborhoods = sorted(neighborhood_data, key=lambda x: x[1], reverse=False)
 
     # Generate the mapping
     neighborhood_map = {neighborhood: rank for rank, (neighborhood, _) in enumerate(sorted_neighborhoods, start=1)}

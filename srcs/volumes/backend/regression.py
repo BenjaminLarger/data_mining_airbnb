@@ -52,3 +52,69 @@ def linear_regression_model(columns, data):
     # Return the trained model and evaluation results
     return model, results
 
+# from sklearn.ensemble import RandomForestRegressor
+	# results = {
+  #       'Root Mean Squared Error': rmse,
+  #       'R-squared': r2
+  #   }
+
+from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import Ridge
+
+def tune_ridge_model(columns, data):
+	"""
+	Tune hyperparameters for Ridge Regression.
+
+	Args:
+		columns (list): List of significant variables (features).
+		data (pd.DataFrame): The dataset with features and target variable.
+
+	Returns:
+		dict: Best hyperparameters and corresponding performance metrics.
+	"""
+	# Features and target
+	X = data[columns]
+	y = data['price']
+
+	# Define hyperparameter grid
+	param_grid = {'alpha': [0.01, 0.1, 1, 10, 100]}
+
+	# Initialize the model
+	ridge = Ridge()
+
+	# Set up GridSearchCV
+	grid_search = GridSearchCV(estimator=ridge, param_grid=param_grid, cv=5, scoring='neg_mean_squared_error', verbose=2, n_jobs=-1)
+
+	# Perform the search
+	grid_search.fit(X, y)
+
+	# Extract the best parameters
+	best_params = grid_search.best_params_
+	best_score = -grid_search.best_score_  # Convert back to positive MSE
+
+	# Train the model with the best parameters on the entire dataset
+	best_ridge = Ridge(**best_params)
+	best_ridge.fit(X, y)
+
+	# Make predictions
+	y_pred = best_ridge.predict(X)
+
+	# Calculate evaluation metrics
+	mse = mean_squared_error(y, y_pred)
+	rmse = mse ** 0.5
+	r2 = r2_score(y, y_pred)
+
+	return {
+		"best_params": best_params,
+		"best_score": best_score,
+		"Root Mean Squared Error": rmse,
+		"R-squared": r2
+	}
+
+# Example Usage
+# columns = ['bedrooms', 'bathrooms', 'latitude', 'longitude']
+# data = your_dataframe
+# results = tune_ridge_model(columns, data)
+# print("Best Parameters:", results['best_params'])
+# print("Best RMSE:", results['best_score'] ** 0.5)
+
