@@ -39,6 +39,7 @@ def random_forest_model(columns, data):
 
 	# Plot the grid search results
 	results = grid_search.cv_results_
+	logging.info(f"random forest Grid Search Results: {results}")
 	fig, ax = plt.subplots(figsize=(12, 6))
 	ax.set_xlabel('Number of Estimators')
 	ax.set_ylabel('Mean Test Score')
@@ -63,7 +64,7 @@ def random_forest_model(columns, data):
 	}
 
 	metrics = evaluate_model(best_regressor, X_train, y_train, X_test, y_test)
-
+	logging.info(f"Random Forest Model Results: {results}")
 	return metrics
 
 # from sklearn.model_selection import GridSearchCV

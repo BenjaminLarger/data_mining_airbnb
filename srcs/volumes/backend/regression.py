@@ -6,55 +6,55 @@ from utils import evaluate_model
 import matplotlib.pyplot as plt
 logging.basicConfig(level=logging.INFO)
 
-def linear_regression_model(columns, data):
-    """
-    Build and train a linear regression model to predict housing prices.
+# def linear_regression_model(columns, data):
+#     """
+#     Build and train a linear regression model to predict housing prices.
 
-    Args:
-        columns (list): List of significant variables for the model.
-        data (pd.DataFrame): The dataset containing features and the target variable.
+#     Args:
+#         columns (list): List of significant variables for the model.
+#         data (pd.DataFrame): The dataset containing features and the target variable.
 
-    Returns:
-        model: The trained linear regression model.
-        results (dict): A dictionary containing model evaluation metrics.
-    """
-    # Prepare the feature matrix (X) and target vector (y)
-    X = data[columns]  # Use the specified columns as features
-    logging.info(f"X: {X}")
-    y = data['price']  # The target variable is the price of the housing unit
-    logging.info(f"y: {y}")
+#     Returns:
+#         model: The trained linear regression model.
+#         results (dict): A dictionary containing model evaluation metrics.
+#     """
+#     # Prepare the feature matrix (X) and target vector (y)
+#     X = data[columns]  # Use the specified columns as features
+#     logging.info(f"X: {X}")
+#     y = data['price']  # The target variable is the price of the housing unit
+#     logging.info(f"y: {y}")
     
-    # Split the data into training and testing sets (80-20 split)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
+#     # Split the data into training and testing sets (80-20 split)
+#     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
-    # Initialize the Linear Regression model
-    model = LinearRegression()
+#     # Initialize the Linear Regression model
+#     model = LinearRegression()
 
-    # Fit the model on the training data
-    model.fit(X_train, y_train)
+#     # Fit the model on the training data
+#     model.fit(X_train, y_train)
 
-    # Make predictions on the testing data
-    y_pred = model.predict(X_test)
+#     # Make predictions on the testing data
+#     y_pred = model.predict(X_test)
 
-    # Calculate evaluation metrics
-    mse = mean_squared_error(y_test, y_pred)  # Mean Squared Error
-    rmse = mse ** 0.5  # Root Mean Squared Error
-    r2 = r2_score(y_test, y_pred)  # R-squared
-    logging.info(f"Mean Squared Error: {mse}")
-    logging.info(f"Root Mean Squared Error: {rmse}")
-    logging.info(f"R-squared: {r2}")
+#     # Calculate evaluation metrics
+#     mse = mean_squared_error(y_test, y_pred)  # Mean Squared Error
+#     rmse = mse ** 0.5  # Root Mean Squared Error
+#     r2 = r2_score(y_test, y_pred)  # R-squared
+#     logging.info(f"Mean Squared Error: {mse}")
+#     logging.info(f"Root Mean Squared Error: {rmse}")
+#     logging.info(f"R-squared: {r2}")
 
-    # Store the results in a dictionary
-    results = {
-        'Root Mean Squared Error': rmse,
-        'R-squared': r2
-    }
-    logging.info(f"Results: {results}")
+#     # Store the results in a dictionary
+#     results = {
+#         'Root Mean Squared Error': rmse,
+#         'R-squared': r2
+#     }
+#     logging.info(f"Results: {results}")
     
-    metrics = evaluate_model(model, X_train, y_train, X_test, y_test)
-
-    # Return the trained model and evaluation results
-    return metrics
+#     metrics = evaluate_model(model, X_train, y_train, X_test, y_test)
+#     logging.info(f"regression Metrics: {metrics}")
+#     # Return the trained model and evaluation results
+#     return metrics
 
 # from sklearn.ensemble import RandomForestRegressor
 	# results = {
@@ -94,6 +94,7 @@ def tune_ridge_model(columns, data):
       
 	# Plot the grid search results
 	results = grid_search.cv_results_
+	logging.info(f"Ridge Grid Search Results: {results}")
 	fig, ax = plt.subplots(figsize=(12, 6))
 	ax.set_xlabel('Alpha')
 	ax.set_ylabel('Mean Test Score')
@@ -117,13 +118,11 @@ def tune_ridge_model(columns, data):
 	mse = mean_squared_error(y, y_pred)
 	rmse = mse ** 0.5
 	r2 = r2_score(y, y_pred)
+      
+	metrics = evaluate_model(best_ridge, X, y, X, y)
+	logging.info(f"Ridge Metrics: {metrics}")
 
-	return {
-		"best_params": best_params,
-		"best_score": best_score,
-		"Root Mean Squared Error": rmse,
-		"R-squared": r2
-	}
+	return metrics
 
 # Example Usage
 # columns = ['bedrooms', 'bathrooms', 'latitude', 'longitude']

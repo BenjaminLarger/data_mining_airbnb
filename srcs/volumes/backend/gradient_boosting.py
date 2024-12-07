@@ -71,7 +71,7 @@ def gradient_boosting_model(columns, data):
 	}
 
 	metrics = evaluate_model(best_model, X_train, y_train, X_test, y_test)
-
+	logging.info(f"gradient boosting Metrics: {metrics}")
 	return metrics
 
 	

@@ -41,15 +41,15 @@ def post_data():
     
 		# Train models
     random_forest_results = random_forest_model(selected_data, data)
-    gradient_boosting_results = gradient_boosting_model(selected_data, data)
-    linear_gradient_results = tune_ridge_model(selected_data, data)
-    knn_results = knn_model(selected_data, data)
+    # gradient_boosting_results = gradient_boosting_model(selected_data, data)
+    # linear_gradient_results = tune_ridge_model(selected_data, data)
+    # knn_results = knn_model(selected_data, data)
     
 		# Simulate results
     # random_forest_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
-    #gradient_boosting_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
-    #linear_gradient_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
-    #knn_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
+    gradient_boosting_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
+    linear_gradient_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
+    knn_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
     
 		# Compare and plot the results
     compare_models(random_forest_results, gradient_boosting_results, linear_gradient_results, knn_results)

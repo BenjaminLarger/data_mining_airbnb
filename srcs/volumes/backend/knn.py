@@ -4,6 +4,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from utils import evaluate_model
 import matplotlib.pyplot as plt
+import logging
+logging.basicConfig(level=logging.INFO)
 
 def knn_model(columns, data):
     """
@@ -38,6 +40,7 @@ def knn_model(columns, data):
 
     # Plot Grid Search Results
     results = grid_search.cv_results_
+    logging.info(f"KNN Grid Search Results: {results}")
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.set_xlabel('Number of Neighbors')
     ax.set_ylabel('Mean Test Score')
@@ -63,6 +66,7 @@ def knn_model(columns, data):
 		}
     
     metrics = evaluate_model(best_knn, X_train, y_train, X_test, y_test)
+    logging.info(f"KNN Metrics: {metrics}")
     return metrics
 
 # Example usage:
