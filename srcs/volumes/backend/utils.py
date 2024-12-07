@@ -106,31 +106,3 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
 
     return metrics
 
-# Example usage:
-# metrics = evaluate_model(trained_model, X_train, y_train, X_test, y_test)
-# print(metrics)
-
-
-def build_json_response(city, dictionary_response, selected_data, random_forest_results, gradient_boosting_results, linear_gradient_results, knn_results):
-		random_forest_r2 = random_forest_results.get('R^2 Score')
-		random_forest_rmse = random_forest_results.get('Root Mean Squared Error')
-		gradient_boosting_r2 = gradient_boosting_results.get('R^2 Score')
-		gradient_boosting_rmse = gradient_boosting_results.get('Root Mean Squared Error')
-		linear_regression_r2 = linear_gradient_results.get('R-squared')
-		linear_regression_rmse = linear_gradient_results.get('Root Mean Squared Error')
-		knn_r2 = knn_results.get('R^2 Score')
-		knn_rmse = knn_results.get('Root Mean Squared Error')
-		return {
-				'city': city,
-				'latitude': dictionary_response.get('latitude'),
-				'longitude': dictionary_response.get('longitude'),
-				'data': selected_data,
-				'random_forest_r2': random_forest_r2,
-				'random_forest_rmse': random_forest_rmse,
-				'gradient_boosting_r2': gradient_boosting_r2,
-				'gradient_boosting_rmse': gradient_boosting_rmse,
-				'linear_regression_r2': linear_regression_r2,
-				'linear_regression_rmse': linear_regression_rmse,
-				'knn_r2': knn_r2,
-				'knn_rmse': knn_rmse
-		}

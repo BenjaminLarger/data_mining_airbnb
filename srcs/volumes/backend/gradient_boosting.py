@@ -10,6 +10,12 @@ import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 from utils import evaluate_model
 
+# DESCRIPTION OF GRADIENT BOOSTING MODEL
+# Gradient Boosting is a machine learning technique for regression and classification problems, 
+# which produces a prediction model in the form of an ensemble of weak prediction models, 
+# typically decision trees. It builds the model in a stage-wise fashion like other boosting methods do, 
+# and it generalizes them by allowing optimization of an arbitrary differentiable loss function.
+
 logging.basicConfig(level=logging.INFO)
 
 def gradient_boosting_model(columns, data):
@@ -56,19 +62,6 @@ def gradient_boosting_model(columns, data):
 	# Make predictions with the best model
 	best_model = grid_search.best_estimator_
 	y_pred = best_model.predict(X_test)
-
-	# Calculate Mean Squared Error
-	mse = mean_squared_error(y_test, y_pred)
-	rmse = np.sqrt(mse)
-
-	r2_score_best = best_model.score(X_test, y_test)
-	best_params = grid_search.best_params_
-	logging.info(f"Mean Squared Error: {mse}")
-
-	results = {
-		'R^2 Score': r2_score_best,
-		'Root Mean Squared Error': rmse
-	}
 
 	metrics = evaluate_model(best_model, X_train, y_train, X_test, y_test)
 	logging.info(f"gradient boosting Metrics: {metrics}")

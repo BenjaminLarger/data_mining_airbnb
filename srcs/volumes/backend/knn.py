@@ -7,6 +7,12 @@ import matplotlib.pyplot as plt
 import logging
 logging.basicConfig(level=logging.INFO)
 
+# DESCRIPTION OF K-NEAREST NEIGHBORS MODEL
+# K-Nearest Neighbors (KNN) is a simple, non-parametric, lazy learning algorithm 
+# that can be used for both regression and classification tasks.
+# It works by finding the 'k' nearest data points in the training set to a given test data point,
+# and then predicting the target value based on the average (for regression) or majority vote (for classification) of the 'k' neighbors.
+
 def knn_model(columns, data):
     """
     Build and train a K-Nearest Neighbors regression model for housing price prediction.
@@ -54,20 +60,8 @@ def knn_model(columns, data):
 
     # Predictions
     y_pred = best_knn.predict(X_test)
-
-    # Metrics
-    mse = mean_squared_error(y_test, y_pred)
-    rmse = mse ** 0.5
-    r2 = r2_score(y_test, y_pred)
-
-    results = {
-				'R^2 Score': r2,
-				'Root Mean Squared Error': rmse
-		}
-    
+   
     metrics = evaluate_model(best_knn, X_train, y_train, X_test, y_test)
     logging.info(f"KNN Metrics: {metrics}")
     return metrics
 
-# Example usage:
-# knn_model(['feature1', 'feature2', 'feature3'], df)
