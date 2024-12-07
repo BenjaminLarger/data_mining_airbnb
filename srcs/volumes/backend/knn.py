@@ -2,6 +2,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
+from utils import evaluate_model
 
 def knn_model(columns, data):
     """
@@ -51,7 +52,8 @@ def knn_model(columns, data):
 				'Root Mean Squared Error': rmse
 		}
     
-    return results
+    metrics = evaluate_model(best_knn, X_train, y_train, X_test, y_test)
+    return metrics
 
 # Example usage:
 # knn_model(['feature1', 'feature2', 'feature3'], df)

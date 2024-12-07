@@ -7,6 +7,7 @@ import pandas as pd
 import logging, requests, os
 import numpy as np
 import matplotlib.pyplot as plt
+from utils import evaluate_model
 
 logging.basicConfig(level=logging.INFO)
 
@@ -56,6 +57,8 @@ def gradient_boosting_model(columns, data):
 		'Root Mean Squared Error': rmse
 	}
 
-	return results
+	metrics = evaluate_model(best_model, X_train, y_train, X_test, y_test)
+
+	return metrics
 
 	

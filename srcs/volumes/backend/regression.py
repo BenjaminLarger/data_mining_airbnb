@@ -2,6 +2,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import logging
+from utils import evaluate_model
 logging.basicConfig(level=logging.INFO)
 
 def linear_regression_model(columns, data):
@@ -48,9 +49,11 @@ def linear_regression_model(columns, data):
         'R-squared': r2
     }
     logging.info(f"Results: {results}")
+    
+    metrics = evaluate_model(model, X_train, y_train, X_test, y_test)
 
     # Return the trained model and evaluation results
-    return model, results
+    return metrics
 
 # from sklearn.ensemble import RandomForestRegressor
 	# results = {

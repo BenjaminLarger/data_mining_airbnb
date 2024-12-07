@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
+from utils import evaluate_model
 logging.basicConfig(level=logging.INFO)
 
 def random_forest_model(columns, data):
@@ -51,7 +52,9 @@ def random_forest_model(columns, data):
 		'Root Mean Squared Error': rmse_best
 	}
 
-	return results
+	metrics = evaluate_model(best_regressor, X_train, y_train, X_test, y_test)
+
+	return metrics
 
 # from sklearn.model_selection import GridSearchCV
 
