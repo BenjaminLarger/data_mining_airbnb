@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import logging
 from utils import evaluate_model
+import matplotlib.pyplot as plt
 logging.basicConfig(level=logging.INFO)
 
 def linear_regression_model(columns, data):
@@ -90,6 +91,16 @@ def tune_ridge_model(columns, data):
 
 	# Perform the search
 	grid_search.fit(X, y)
+      
+	# Plot the grid search results
+	results = grid_search.cv_results_
+	fig, ax = plt.subplots(figsize=(12, 6))
+	ax.set_xlabel('Alpha')
+	ax.set_ylabel('Mean Test Score')
+	ax.set_title('Grid Search Results')
+	ax.grid(True)
+	ax.plot(param_grid['alpha'], -results['mean_test_score'], marker='o', label='Mean Test Score')
+	ax.legend()
 
 	# Extract the best parameters
 	best_params = grid_search.best_params_

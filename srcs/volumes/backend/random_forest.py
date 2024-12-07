@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
 from utils import evaluate_model
+import matplotlib.pyplot as plt
 logging.basicConfig(level=logging.INFO)
 
 def random_forest_model(columns, data):
@@ -35,7 +36,16 @@ def random_forest_model(columns, data):
 
 	# Best parameters from Grid Search
 	best_params = grid_search.best_params_
-	logging.info(f"Best Parameters: {best_params}")
+
+	# Plot the grid search results
+	results = grid_search.cv_results_
+	fig, ax = plt.subplots(figsize=(12, 6))
+	ax.set_xlabel('Number of Estimators')
+	ax.set_ylabel('Mean Test Score')
+	ax.set_title('Grid Search Results')
+	ax.grid(True)
+	ax.plot(results['param_n_estimators'], -results['mean_test_score'], marker='o', label='Mean Test Score')
+	ax.legend()
 
 	# Train the model with the best parameters
 	best_regressor = RandomForestRegressor(**best_params, random_state=42)

@@ -7,6 +7,7 @@ import pandas as pd
 import logging, requests, os
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from utils import evaluate_model
 
 logging.basicConfig(level=logging.INFO)
@@ -35,6 +36,18 @@ def gradient_boosting_model(columns, data):
 	# Perform Grid Search with cross-validation
 	grid_search = GridSearchCV(estimator=gbr, param_grid=param_grid, cv=3, n_jobs=-1, scoring='neg_mean_squared_error')
 	grid_search.fit(X_train, y_train)
+
+	# Plot the grid search results
+	results = grid_search.cv_results_
+	logging.info(f"Grid Search Results: {results}")
+	# Plot the results of the grid search
+	fig, ax = plt.subplots(figsize=(12, 6))
+	ax.set_xlabel('Number of Estimators')
+	ax.set_ylabel('Mean Test Score')
+	ax.set_title('Grid Search Results')
+	ax.grid(True)
+	ax.plot(results['param_n_estimators'], -results['mean_test_score'], marker='o', label='Mean Test Score')
+	ax.legend()
 
 	# Best Parameters
 	logging.info(f"Best Parameters: {grid_search.best_params_}")

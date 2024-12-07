@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from utils import evaluate_model
+import matplotlib.pyplot as plt
 
 def knn_model(columns, data):
     """
@@ -35,6 +36,16 @@ def knn_model(columns, data):
     grid_search = GridSearchCV(knn, param_grid, cv=5, scoring='neg_mean_squared_error')
     grid_search.fit(X_train, y_train)
 
+    # Plot Grid Search Results
+    results = grid_search.cv_results_
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.set_xlabel('Number of Neighbors')
+    ax.set_ylabel('Mean Test Score')
+    ax.set_title('Grid Search Results')
+    ax.grid(True)
+    ax.plot(results['param_n_neighbors'], -results['mean_test_score'], marker='o', label='Mean Test Score')
+    ax.legend()
+
     # Best model
     best_knn = grid_search.best_estimator_
 
@@ -45,7 +56,6 @@ def knn_model(columns, data):
     mse = mean_squared_error(y_test, y_pred)
     rmse = mse ** 0.5
     r2 = r2_score(y_test, y_pred)
-
 
     results = {
 				'R^2 Score': r2,
