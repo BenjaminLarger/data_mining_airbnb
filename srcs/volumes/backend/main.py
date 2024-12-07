@@ -60,15 +60,15 @@ def post_data():
     
     selected_data = select_pertinent_data(data)
     
-    #random_forest_results = random_forest_model(selected_data, data)
-    # gradient_boosting_results = gradient_boosting_model(selected_data, data)
-    # linear_gradient_results = tune_ridge_model(selected_data, data)
+    random_forest_results = random_forest_model(selected_data, data)
+    gradient_boosting_results = gradient_boosting_model(selected_data, data)
+    linear_gradient_results = tune_ridge_model(selected_data, data)
     knn_results = knn_model(selected_data, data)
     logging.info(f"KNN Results: {knn_results}")
-    random_forest_results = {'R^2 Score': 0.29, 'Root Mean Squared Error': 0.3}
-    gradient_boosting_results = {'R^2 Score': 0.2, 'Root Mean Squared Error': 0.3}
+    #random_forest_results = {'R^2 Score': 0.29, 'Root Mean Squared Error': 0.3}
+    #gradient_boosting_results = {'R^2 Score': 0.2, 'Root Mean Squared Error': 0.3}
     # knn_results = {'R^2 Score': 0.2, 'Root Mean Squared Error': 0.3}
-    linear_gradient_results = {'R-squared': 0.3, 'Root Mean Squared Error': 0.3}
+    #linear_gradient_results = {'R-squared': 0.3, 'Root Mean Squared Error': 0.3}
     # Create a json response
     json_response = build_json_response(city, dictionary_response, selected_data, random_forest_results, gradient_boosting_results, linear_gradient_results, knn_results)
     return json_response
