@@ -24,6 +24,12 @@ def select_features(df, target='price', threshold_target=0.1, threshold_features
     # Extract correlations with the target variable
     correlation_with_target = correlation_matrix[target].sort_values(ascending=False)
     logging.info(f"correlation_with_target: {correlation_with_target}")
+    
+    # Plot the correlation matrix
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0)
+    plt.title('Correlation Matrix')
+    plt.show()
 
     # Select features with high correlation to the target
     potential_features = correlation_with_target[abs(correlation_with_target) > threshold_target].index.tolist()
