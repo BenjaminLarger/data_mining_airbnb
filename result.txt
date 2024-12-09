@@ -259,7 +259,7 @@ backend  | 14  5524.0            8   4.0  ...  -22.97517         4            12
 backend  | 23   773.0            2   1.0  ...   -22.9836         4            18
 backend  |
 backend  | [5 rows x 8 columns]
-backend  | INFO:root:Grid Search Results: {'mean_fit_time': array([ 2.74073068,  4.94381523,  7.11419813,  3.80562846,  7.30638758,
+backend  | INFO:root:Gradient forest Grid Search Results: {'mean_fit_time': array([ 2.74073068,  4.94381523,  7.11419813,  3.80562846,  7.30638758,
 backend  |        10.81160188,  4.83333945, 10.28977259, 15.3806258 ,  2.47484024,
 backend  |         4.73438581,  7.15316224,  3.86087497,  8.39154832, 12.35730664,
 backend  |         5.69471391, 10.34516875, 14.99192087,  2.39127628,  4.46814235,
@@ -391,3 +391,8 @@ backend  |        4698.51822253, 3575.54114515]), 'rank_test_score': array([ 6, 
 backend  | INFO:root:KNN Metrics: {'MAE (Train)': np.float64(0.0), 'MAE (Test)': np.float64(70.03884746936556), 'RMSE (Train)': np.float64(0.0), 'RMSE (Test)': np.float64(136.99891412669743), 'R² (Train)': 1.0, 'R² (Test)': 0.9808166674793835, 'Cross-Validation RMSE': np.float64(145.21912789691416)}
 backend  | INFO:root:Model comparison plot generated
 backend  | INFO:werkzeug:172.18.0.1 - - [07/Dec/2024 14:41:55] "POST /api/postdata HTTP/1.1" 200 -
+
+select_features
+selected_features: ['price', 'accommodates', 'beds', 'neighbourhood_cleansed', 'host_total_listings_count', 'latitude', 'room_type']
+selected_features: ['price', 'accommodates', 'beds', 'neighbourhood_cleansed', 'host_total_listings_count', 'latitude', 'room_type']
+selected_features: ['price', 'neighbourhood_cleansed', 'host_total_listings_count', 'room_type']

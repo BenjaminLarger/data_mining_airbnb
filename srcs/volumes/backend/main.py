@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from parse import open_and_parse_file
 from random_forest import random_forest_model
-from correlation import select_pertinent_data
+from variable_selector import select_pertinent_data
 from gradient_boosting import gradient_boosting_model
 from dictionary import get_and_parse_city
 from knn import knn_model
@@ -40,16 +40,16 @@ def post_data():
     selected_data = select_pertinent_data(data)
     
 		# Train models
-    random_forest_results = random_forest_model(selected_data, data)
+    # random_forest_results = random_forest_model(selected_data, data)
     gradient_boosting_results = gradient_boosting_model(selected_data, data)
     linear_gradient_results = tune_ridge_model(selected_data, data)
     knn_results = knn_model(selected_data, data)
     
 		# Simulate results
-    #random_forest_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
+    random_forest_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
     # gradient_boosting_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
     # linear_gradient_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
-    # knn_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
+    #knn_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
     
 		# Compare and plot the results
     compare_models(random_forest_results, gradient_boosting_results, linear_gradient_results, knn_results)
