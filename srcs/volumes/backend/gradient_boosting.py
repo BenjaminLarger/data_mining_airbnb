@@ -7,7 +7,6 @@ import pandas as pd
 import logging, requests, os
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
 from utils import evaluate_model
 
 # DESCRIPTION OF GRADIENT BOOSTING MODEL

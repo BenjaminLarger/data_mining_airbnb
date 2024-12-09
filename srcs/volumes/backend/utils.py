@@ -60,6 +60,8 @@ def compare_models(random_forest_results, gradient_boosting_results, linear_grad
 		rects2 = ax.bar(x, test_mae, width, label='Test MAE')
 		rects3 = ax.bar(x + width, train_rmse, width, label='Train RMSE')
 		rects4 = ax.bar(x + 2 * width, test_rmse, width, label='Test RMSE')
+		rects5 = ax.bar(x + 3 * width, train_r2, width, label='Train R²')
+		rects6 = ax.bar(x + 4 * width, test_r2, width, label='Test R²')
 
 		ax.set_ylabel('Scores')
 		ax.set_title('Model Comparison')
