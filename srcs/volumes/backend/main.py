@@ -46,10 +46,10 @@ def post_data():
     knn_results = knn_model(selected_data, data)
     
 		# Simulate results
-    random_forest_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
-    # gradient_boosting_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
-    # linear_gradient_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
-    #knn_results = {'MAE (Train)': 0.2, 'MAE (Test)': 0.3, 'RMSE (Train)': 0.2, 'RMSE (Test)': 0.3, 'R² (Train)': 0.2, 'R² (Test)': 0.3, 'Cross-Validation RMSE': 0.3}
+    random_forest_results = {'MAE_TRAIN': 337.26, 'MAE_TEST': 418.09, 'RMSE_TRAIN': 641.01, 'RMSE_TEST': 725.75, 'R2_TRAIN': 0.61, 'R2_TEST': 0.42, 'Cross-Validation RMSE': 815.06}
+    # gradient_boosting_results = {'MAE_TRAIN': 423.06, 'MAE_TEST': 426.85, 'RMSE_TRAIN': 776.75, 'RMSE_TEST': 763.79, 'R2_TRAIN': 0.43, 'R2_TEST': 0.4, 'Cross-Validation RMSE': 819.79}
+    # linear_gradient_results = {'MAE_TRAIN': 2.50, 'MAE_TEST': 2.50, 'RMSE_TRAIN': 4.43, 'RMSE_TEST': 4.43, 'R2_TRAIN': 1, 'R2_TEST': 1, 'Cross-Validation RMSE': 5.65}
+    # knn_results = {'MAE_TRAIN': 0, 'MAE_TEST': 70.04, 'RMSE_TRAIN': 0, 'RMSE_TEST': 137, 'R2_TRAIN': 1, 'R2_TEST': 1, 'Cross-Validation RMSE': 145.22}
     
 		# Compare and plot the results
     compare_models(random_forest_results, gradient_boosting_results, linear_gradient_results, knn_results)

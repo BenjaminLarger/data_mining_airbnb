@@ -10,7 +10,6 @@ const API_ENDPOINT = ' http://127.0.0.1:8888/api/postdata'; // Replace with your
 // Function to handle form submission
 function handleFormSubmission() {
   const userInput = travelInput.value.trim();
-  console.log('User input:', userInput);
   
   if (!userInput) {
     alert('Please enter a destination or preference!');
@@ -40,7 +39,6 @@ function handleFormSubmission() {
     .then((data) => {
       submitButton.disabled = false;
       submitButton.innerHTML = 'Submit';
-      console.log('Received data:', data);
       updateMap(data);
 			// Show data in the html page
 			// document.getElementById('suggestions').innerHTML = data.suggestions;

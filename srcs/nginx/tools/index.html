@@ -1,21 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airbnb data analysis</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" /> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Airbnb Data Analysis</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" /> 
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+		header {
+			background-color: #4CAF50;
+			color: white;
+			padding: 1rem;
+			text-align: center;
+		}
+		main {
+			padding: 2rem;
+		}
+		.input-container {
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+		.input-container label {
+			display: block;
+			margin-bottom: 0.5rem;
+			font-weight: bold;
+		}
+		#city-select {
+			padding: 0.5rem;
+			width: 80%;
+			max-width: 300px;
+			margin-bottom: 1rem;
+		}
+		#submit-button {
+			padding: 0.5rem 1rem;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+		#submit-button:hover {
+			background-color: #45a049;
+		}
+		.map-container {
+			margin-top: 2rem;
+		}
+	</style>
 </head>
 <body>
-  <header>
-    <h1>Airbnb data analysis</h1>
-  </header>
-  <main>
-    <div class="input-container">
-      <label for="city-select">Provide the .parquet file here.</label>
-      <!-- <input type="file" id="city-select"  placeholder="Provide the .parquet file here" style="width: 80%;" accept=".parquet"> -->
-      <select id="city-select">
+	<header>
+		<h1>Airbnb Data Analysis</h1>
+	</header>
+	<main>
+		<div class="input-container">
+			<label for="city-select">Choose a city.</label>
+			<select id="city-select">
 				<option value="paris">Paris</option>
 				<option value="london">Londres</option>
 				<option value="rome">Rome</option>
@@ -26,15 +70,14 @@
 				<option value="mexico">Mexico</option>
 			</select>
 			<button id="submit-button">Search</button>
-    </div>	
-    <div id="map" class="map-container">
-      <!-- Map will be rendered here -->
-      <div id="map" style="height: 400px; width: 100%;"></div>
-      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    </div>
-  </main>
-  <script src="app.js"></script>
-  <script src="map.js"></script>
+		</div>  
+		<div id="map" class="map-container">
+			<div id="map" style="height: 400px; width: 100%;"></div>
+			<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+		</div>
+	</main>
+	<script src="app.js"></script>
+	<script src="map.js"></script>
 </body>
 </html>
 

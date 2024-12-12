@@ -7,39 +7,39 @@ logging.basicConfig(level=logging.INFO)
 
 def compare_models(random_forest_results, gradient_boosting_results, linear_gradient_results, knn_results):
 		# Extract random forest model metrics
-		random_forest_mae_train = random_forest_results.get('MAE (Train)')
-		random_forest_mae_test = random_forest_results.get('MAE (Test)')
-		random_forest_rmse_train = random_forest_results.get('RMSE (Train)')
-		random_forest_rmse_test = random_forest_results.get('RMSE (Test)')
-		random_forest_r2_train = random_forest_results.get('R² (Train)')
-		random_forest_r2_test = random_forest_results.get('R² (Test)')
+		random_forest_mae_train = random_forest_results.get('MAE_TRAIN')
+		random_forest_mae_test = random_forest_results.get('MAE_TEST')
+		random_forest_rmse_train = random_forest_results.get('RMSE_TRAIN')
+		random_forest_rmse_test = random_forest_results.get('RMSE_TEST')
+		random_forest_r2_train = random_forest_results.get('R2_TRAIN')
+		random_forest_r2_test = random_forest_results.get('R2_TEST')
 		random_forest_cv_rmse = random_forest_results.get('Cross-Validation RMSE')
 
 		# Extract gradient boosting model metrics
-		gradient_boosting_mae_train = gradient_boosting_results.get('MAE (Train)')
-		gradient_boosting_mae_test = gradient_boosting_results.get('MAE (Test)')
-		gradient_boosting_rmse_train = gradient_boosting_results.get('RMSE (Train)')
-		gradient_boosting_rmse_test = gradient_boosting_results.get('RMSE (Test)')
-		gradient_boosting_r2_train = gradient_boosting_results.get('R² (Train)')
-		gradient_boosting_r2_test = gradient_boosting_results.get('R² (Test)')
+		gradient_boosting_mae_train = gradient_boosting_results.get('MAE_TRAIN')
+		gradient_boosting_mae_test = gradient_boosting_results.get('MAE_TEST')
+		gradient_boosting_rmse_train = gradient_boosting_results.get('RMSE_TRAIN')
+		gradient_boosting_rmse_test = gradient_boosting_results.get('RMSE_TEST')
+		gradient_boosting_r2_train = gradient_boosting_results.get('R2_TRAIN')
+		gradient_boosting_r2_test = gradient_boosting_results.get('R2_TEST')
 		gradient_boosting_cv_rmse = gradient_boosting_results.get('Cross-Validation RMSE')
 
 		# Extract linear regression model metrics
-		linear_regression_mae_train = linear_gradient_results.get('MAE (Train)')
-		linear_regression_mae_test = linear_gradient_results.get('MAE (Test)')
-		linear_regression_rmse_train = linear_gradient_results.get('RMSE (Train)')
-		linear_regression_rmse_test = linear_gradient_results.get('RMSE (Test)')
-		linear_regression_r2_train = linear_gradient_results.get('R² (Train)')
-		linear_regression_r2_test = linear_gradient_results.get('R² (Test)')
+		linear_regression_mae_train = linear_gradient_results.get('MAE_TRAIN')
+		linear_regression_mae_test = linear_gradient_results.get('MAE_TEST')
+		linear_regression_rmse_train = linear_gradient_results.get('RMSE_TRAIN')
+		linear_regression_rmse_test = linear_gradient_results.get('RMSE_TEST')
+		linear_regression_r2_train = linear_gradient_results.get('R2_TRAIN')
+		linear_regression_r2_test = linear_gradient_results.get('R2_TEST')
 		linear_regression_cv_rmse = linear_gradient_results.get('Cross-Validation RMSE')
 
 		# Extract KNN model metrics
-		knn_mae_train = knn_results.get('MAE (Train)')
-		knn_mae_test = knn_results.get('MAE (Test)')
-		knn_rmse_train = knn_results.get('RMSE (Train)')
-		knn_rmse_test = knn_results.get('RMSE (Test)')
-		knn_r2_train = knn_results.get('R² (Train)')
-		knn_r2_test = knn_results.get('R² (Test)')
+		knn_mae_train = knn_results.get('MAE_TRAIN')
+		knn_mae_test = knn_results.get('MAE_TEST')
+		knn_rmse_train = knn_results.get('RMSE_TRAIN')
+		knn_rmse_test = knn_results.get('RMSE_TEST')
+		knn_r2_train = knn_results.get('R2_TRAIN')
+		knn_r2_test = knn_results.get('R2_TEST')
 		knn_cv_rmse = knn_results.get('Cross-Validation RMSE')
 
 		# Plotting
@@ -94,12 +94,12 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
 
     # Accuracy metrics on test data
     metrics = {
-    	"MAE (Train)": mean_absolute_error(y_train, y_pred_train),
-    	"MAE (Test)": mean_absolute_error(y_test, y_pred_test),
-			"RMSE (Train)": np.sqrt(mean_squared_error(y_train, y_pred_train)),
-    	"RMSE (Test)": np.sqrt(mean_squared_error(y_test, y_pred_test)),
-    	"R² (Train)": r2_score(y_train, y_pred_train),
-    	"R² (Test)": r2_score(y_test, y_pred_test)
+    	"MAE_TRAIN": mean_absolute_error(y_train, y_pred_train),
+    	"MAE_TEST": mean_absolute_error(y_test, y_pred_test),
+			"RMSE_TRAIN": np.sqrt(mean_squared_error(y_train, y_pred_train)),
+    	"RMSE_TEST": np.sqrt(mean_squared_error(y_test, y_pred_test)),
+    	"R2_TRAIN": r2_score(y_train, y_pred_train),
+    	"R2_TEST": r2_score(y_test, y_pred_test)
     }
 
     # Robustness (Cross-Validation)
